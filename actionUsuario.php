@@ -31,6 +31,18 @@
         else{
             //Se não estiver vazio, o dado é filtrado e armazenado na variável PHP
             $dataNascimentoUsuario = filtrar_entrada($_POST["dataNascimentoUsuario"]);
+
+            //Usa a função strlen() para verificar o comprimento da $dataNascimentoUsuario
+            if(strlen($dataNascimentoUsuario) == 10){
+                //Aplica a função substr() para gerar substrings de $dataNascimentoUsuario e armazenar em dia, mês e ano
+                $diaNascimentoUsuario = substr($dataNascimentoUsuario, 8, 2);
+                $mesNascimentoUsuario = substr($dataNascimentoUsuario, 5, 2);
+                $anoNascimentoUsuario = substr($dataNascimentoUsuario, 0, 4);
+            }
+            else{
+                echo "<div class='alert alert-warning text-center'><strong>DATA INVÁLIDA</strong></div>";
+                $erroPreenchimento = true;
+            }
         }
 
         //Validação do campo cidadeUsuario
@@ -66,10 +78,11 @@
         }
         else{
             //Se não estiver vazio, o dado é filtrado e armazenado na variável PHP
-            $senhaUsuario = filtrar_entrada($_POST["senhaUsuario"]);
+            //Usa a função md5() para criptografar a $senhaUsuario 
+            $senhaUsuario = md5(filtrar_entrada($_POST["senhaUsuario"]));
         }
 
-        //Validação do campo senhaUsuario
+        //Validação do campo confirmarSenhaUsuario
         //Utiliza a função empty() para verificar se o $_POST["confirmarSenhaUsuario"] está vazio
         if(empty($_POST["confirmarSenhaUsuario"])){
             //Se estiver vazio, exibe alerta e altera a variável $erroPreenchimento para true
@@ -78,7 +91,48 @@
         }
         else{
             //Se não estiver vazio, o dado é filtrado e armazenado na variável PHP
-            $confirmarSenhaUsuario = filtrar_entrada($_POST["confirmarSenhaUsuario"]);
+            $confirmarSenhaUsuario = md5(filtrar_entrada($_POST["confirmarSenhaUsuario"]));
+
+            //Verifica se a $senhaUsuario e $confirmarSenha usuário são diferentes
+            if($senhaUsuario != $confirmarSenhaUsuario){
+                echo "<div class='alert alert-warning text-center'>As <strong>SENHAS</strong> informadas são diferentes!</div>";
+                $erroPreenchimento = true;
+            }
+        }
+
+        //Verifica se não há erros de preenchimento
+        if(!$erroPreenchimento){
+            echo "<div class='alert alert-success text-center'>Os dados do <strong>USUÁRIO</strong> foram cadastrados com sucesso!</div>";
+            echo "
+                <div class='container mt-3 mb-3'>
+                    <table class='table'>
+                        <tr>
+                            <th>NOME</th>
+                            <td>$nomeUsuario</td>
+                        </tr>
+                        <tr>
+                            <th>DATA DE NASCIMENTO</th>
+                            <td>$diaNascimentoUsuario/$mesNascimentoUsuario/$anoNascimentoUsuario</td>
+                        </tr>
+                        <tr>
+                            <th>CIDADE</th>
+                            <td>$cidadeUsuario</td>
+                        </tr>
+                        <tr>
+                            <th>EMAIL</th>
+                            <td>$emailUsuario</td>
+                        </tr>
+                        <tr>
+                            <th>SENHA</th>
+                            <td>$senhaUsuario</td>
+                        </tr>
+                        <tr>
+                            <th>CONFIRMAR SENHA</th>
+                            <td>$confirmarSenhaUsuario</td>
+                        </tr>
+                    </table>
+                </div>
+            ";
         }
 
 
