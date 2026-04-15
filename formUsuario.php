@@ -5,7 +5,7 @@
     </div>
 
     <div class="d-flex justify-content-center">
-        <form action="actionUsuario.php" method="POST" class="was-validated">
+        <form action="actionUsuario.php" method="POST" class="was-validated" enctype="multipart/form-data">
             
             <div class="form-floating mt-3 mb-3">
                 <input type="file" name="fotoUsuario" id="fotoUsuario" placeholder="Foto" class="form-control">
