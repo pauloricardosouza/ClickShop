@@ -21,6 +21,8 @@
         $_SESSION['idUsuario']    = $registro['idUsuario'];
         $_SESSION['nomeUsuario']  = $registro['nomeUsuario'];
         $_SESSION['emailUsuario'] = $registro['emailUsuario'];
+        $_SESSION['nivelUsuario'] = $registro['nivelUsuario'];
+        $_SESSION['logado']       = true;
 
         //Redireciona o usuário para a página inicial
         header("Location: index.php");
