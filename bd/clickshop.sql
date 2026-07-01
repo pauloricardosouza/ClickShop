@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 10/06/2026 às 22:42
+-- Tempo de geração: 01/07/2026 às 23:04
 -- Versão do servidor: 8.0.41
 -- Versão do PHP: 8.2.12
 
@@ -20,6 +20,25 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `clickshop`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `anuncios`
+--
+
+CREATE TABLE `anuncios` (
+  `idAnuncio` int NOT NULL,
+  `Usuarios_idUsuario` int NOT NULL,
+  `fotoAnuncio` varchar(200) NOT NULL,
+  `tituloAnuncio` varchar(30) NOT NULL,
+  `descricaoAnuncio` varchar(300) NOT NULL,
+  `categoriaAnuncio` varchar(20) NOT NULL,
+  `valorAnuncio` decimal(10,2) NOT NULL,
+  `dataAnuncio` date NOT NULL,
+  `horaAnuncio` time NOT NULL,
+  `statusAnuncio` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -52,6 +71,13 @@ INSERT INTO `usuarios` (`idUsuario`, `fotoUsuario`, `nomeUsuario`, `dataNascimen
 --
 
 --
+-- Índices de tabela `anuncios`
+--
+ALTER TABLE `anuncios`
+  ADD PRIMARY KEY (`idAnuncio`),
+  ADD KEY `fk_anuncios_usuarios` (`Usuarios_idUsuario`);
+
+--
 -- Índices de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -62,10 +88,26 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de tabela `anuncios`
+--
+ALTER TABLE `anuncios`
+  MODIFY `idAnuncio` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `idUsuario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Restrições para tabelas despejadas
+--
+
+--
+-- Restrições para tabelas `anuncios`
+--
+ALTER TABLE `anuncios`
+  ADD CONSTRAINT `fk_anuncios_usuarios` FOREIGN KEY (`Usuarios_idUsuario`) REFERENCES `usuarios` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
