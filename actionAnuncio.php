@@ -99,7 +99,7 @@
 
             //Cria uma variável para armazenar a QUERY que realiza a inserção de dados do Usuário na tabela Anuncios
             $inserirAnuncio = "INSERT INTO Anuncios (Usuarios_idUsuario, fotoAnuncio, tituloAnuncio, descricaoAnuncio, categoriaAnuncio, valorAnuncio, dataAnuncio, horaAnuncio, statusAnuncio)
-                            VALUES ($idUsuario, '$fotoAnuncio', '$tituloAnuncio', '$descricaoAnuncio', '$categoriaAnuncio', '$valorAnuncio', '$dataAnuncio', '$horaAnuncio', 'Disponivel')";
+                            VALUES ($idUsuario, '$fotoAnuncio', '$tituloAnuncio', '$descricaoAnuncio', '$categoriaAnuncio', '$valorAnuncio', '$dataAnuncio', '$horaAnuncio', 'disponivel')";
 
             //Inclui o arquivo de conexão com o Banco de Dados
             include "conexaoBD.php";
